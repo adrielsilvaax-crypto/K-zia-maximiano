@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Surpresa para Kézia 🌹</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+  font-family: Arial, sans-serif;
+  text-align:center;
+  background: linear-gradient(to bottom right, #ffe6f0, #ffccf2);
+  padding:20px;
+  overflow-x:hidden;
+  margin:0;
+  transition: background 1s ease;
+}
+#paginaInicial{ margin-top: 100px; }
+#projeto{ display:none; }
+.container{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-bottom: 20px;
+}
+.card{
+  margin: 12px;
+  text-align: center;
+}
+img{
+  width:200px;
+  max-width:45vw;
+  border-radius:20px;
+  cursor:pointer;
+  transition: transform 0.4s, box-shadow 0.4s;
+}
+img:hover{
+  transform: scale(1.08);
+  box-shadow: 0 10px 20px rgba(255,0,100,0.4);
+}
+.card .mensagem{
+  margin-top: 8px;
+  color: #b30059;
+  font-size: 16px;
+  min-height: 60px;
+  transition: opacity 0.5s ease, transform 0.3s ease;
+  opacity: 0;
+}
+.heart{
+  position: absolute;
+  font-size: 30px; /* maior */
+  user-select: none;
+  pointer-events: none;
+  animation: fall 4s linear forwards; /* mais lenta */
+  z-index: 9999;
+}
+@keyframes fall{
+  0% {transform: translateY(0) scale(1);}
+  50% {transform: translateY(300px) scale(1.3);}
+  100% {transform: translateY(600px) scale(1.5); opacity:0;}
+}
+footer{
+  margin-top:40px;
+  font-size:18px;
+  color:#b30059;
+  opacity:0;
+  animation: fadeInFooter 2s forwards 1s;
+}
+@keyframes fadeInFooter{
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+button{
+  padding:10px 20px;
+  font-size:16px;
+  border:none;
+  border-radius:10px;
+  background:#ff66b3;
+  color:white;
+  cursor:pointer;
+  margin-bottom:20px;
+  transition:0.3s;
+}
+button:hover{ background:#ff3399; }
+</style>
+</head>
+<body>
+
+<div id="paginaInicial">
+  <h1>Bom dia, Kézia 🌸</h1>
+  <p>Tenho uma surpresa especial pra você 💖</p>
+  <button onclick="abrirProjeto()">Clique para ver sua surpresa 💖</button>
+</div>
+
+<div id="projeto">
+  <h1>Feliz Dia das Mulheres 🌹</h1>
+  <h2>Kézia</h2>
+  <p>Clique nas fotos para ver uma mensagem 👇</p>
+
+  <div class="container">
+    <div class="card">
+      <img src="https://i.imgur.com/KlBkBAD.jpeg" onclick="msg1(this)">
+      <div class="mensagem"></div>
+    </div>
+    <div class="card">
+      <img src="https://i.imgur.com/dwlItlD.jpeg" onclick="msg2(this)">
+      <div class="mensagem"></div>
+    </div>
+    <div class="card">
+      <img src="https://i.imgur.com/wFzdpWP.jpeg" onclick="msg3(this)">
+      <div class="mensagem"></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <img src="https://i.imgur.com/oJwe9zQ.jpeg" onclick="msg4(this)">
+      <div class="mensagem"></div>
+    </div>
+    <div class="card">
+      <img src="https://i.imgur.com/OQfgAvf.jpeg" onclick="msg5(this)">
+      <div class="mensagem"></div>
+    </div>
+    <div class="card">
+      <img src="https://i.imgur.com/Inhggzf.jpeg" onclick="msg6(this)">
+      <div class="mensagem"></div>
+    </div>
+    <div class="card">
+      <img src="https://i.imgur.com/KYKQDHm.jpeg" onclick="msg7(this)">
+      <div class="mensagem"></div>
+    </div>
+  </div>
+
+  <footer>Feito especialmente pra você 💖</footer>
+</div>
+
+<script>
+function abrirProjeto(){
+  document.getElementById('paginaInicial').style.display = 'none';
+  document.getElementById('projeto').style.display = 'block';
+}
+
+// função para criar corações caindo
+function createHeart(){
+  const heart = document.createElement('div');
+  heart.className = 'heart';
+  const colors = ['#ff3366','#ff66b3','#ff99cc','#ff3399','#ff0066'];
+  heart.style.color = colors[Math.floor(Math.random()*colors.length)];
+  heart.innerHTML = '❤️';
+  heart.style.left = (Math.random() * (window.innerWidth - 50)) + 'px';
+  heart.style.fontSize = (25 + Math.random() * 25) + 'px';
+  document.body.appendChild(heart);
+  setTimeout(()=>{ heart.remove() }, 4000);
+}
+
+// função para mostrar mensagem embaixo da foto clicada
+function showMessageCard(elemento, texto, numHearts){
+  const msgDiv = elemento.nextElementSibling;
+  msgDiv.style.opacity = 0;
+  msgDiv.style.transform = "scale(0.95)";
+  setTimeout(()=>{
+    msgDiv.innerHTML = texto;
+    msgDiv.style.opacity = 1;
+    msgDiv.style.transform = "scale(1)";
+  }, 100);
+  for(let i=0;i<numHearts;i++) createHeart();
+}
+
+// mensagens de cada foto
+function msg1(el){ showMessageCard(el, "Kézia, a gente se conhece há tantos anos que você já faz parte da minha história. Seu jeito, seu coração e sua fé são coisas que eu admiro muito em você.",15);}
+function msg2(el){ showMessageCard(el, "Eu gosto muito dos momentos simples que a gente passa juntos, das conversas, das risadas e até das brincadeiras. Esses momentos mostram o quanto você é alguém que traz leveza e alegria.",15);}
+function msg3(el){ showMessageCard(el, "Hoje, no Dia das Mulheres, eu quis fazer algo simples para te lembrar o quanto você é especial. Que Deus continue abençoando sua vida e guiando seus caminhos. Feliz Dia das Mulheres, Kézia 🌹",20);}
+function msg4(el){ showMessageCard(el, "Cada momento com você é inesquecível, Kézia 💖",12);}
+function msg5(el){ showMessageCard(el, "Seu sorriso ilumina meus dias 🌸",12);}
+function msg6(el){ showMessageCard(el, "Adoro a nossa amizade e tudo que vivemos juntos 🌹",12);}
+function msg7(el){ showMessageCard(el, "Você é incrível e merece todo carinho do mundo ✨",15);}
+</script>
+
+</body>
+</html>
